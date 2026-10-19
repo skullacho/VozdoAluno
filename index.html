@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voz do Aluno | Coordenação</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <header class="topo">
+    <div class="container topo-conteudo">
+      <div class="marca">
+        <div class="logo">VA</div>
+        <div>
+          <h1>Voz do Aluno</h1>
+          <p>Um colégio melhor começa com sua voz.</p>
+        </div>
+      </div>
+      <span class="selo">Portal de melhorias</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="apresentacao">
+      <div>
+        <span class="etiqueta">PARTICIPE DA MUDANÇA</span>
+        <h2>Sua ideia pode transformar nossa escola.</h2>
+        <p>
+          Envie sugestões de melhorias para a coordenação,
+          acompanhe seu pedido e ajude a construir um
+          ambiente escolar cada vez melhor.
+        </p>
+      </div>
+    </section>
+
+    <nav class="abas">
+      <button class="aba-btn ativo" data-aba="enviar">
+        Enviar sugestão
+      </button>
+      <button class="aba-btn" data-aba="consultar">
+        Consultar pedido
+      </button>
+      <button class="aba-btn" data-aba="coordenacao">
+        Coordenação
+      </button>
+    </nav>
+
+    <!-- ÁREA DO ALUNO -->
+    <section id="enviar" class="aba-conteudo ativo">
+      <div class="painel">
+        <div class="painel-cabecalho">
+          <h2>Nova sugestão</h2>
+          <p>
+            Preencha os campos abaixo para enviar sua ideia
+            à coordenação.
+          </p>
+        </div>
+
+        <form id="formSugestao">
+          <div class="form-grid">
+            <div class="campo">
+              <label for="nome">Nome do aluno</label>
+              <input type="text" id="nome" required
+                     maxlength="100"
+                     placeholder="Seu nome completo">
+            </div>
+
+            <div class="campo">
+              <label for="turma">Turma</label>
+              <input type="text" id="turma" required
+                     maxlength="30" placeholder="Ex.: 3º DS">
+            </div>
+          </div>
+
+          <div class="campo">
+            <label for="categoria">Categoria da melhoria</label>
+            <select id="categoria" required>
+              <option value="">Selecione uma categoria</option>
+              <option>Infraestrutura</option>
+              <option>Limpeza</option>
+              <option>Salas de aula</option>
+              <option>Tecnologia</option>
+              <option>Alimentação</option>
+              <option>Eventos e atividades</option>
+              <option>Outros</option>
+            </select>
+          </div>
+
+          <div class="campo">
+            <label for="titulo">Título da sugestão</label>
+            <input type="text" id="titulo" required
+                   maxlength="100"
+                   placeholder="Ex.: Melhorar o Wi-Fi">
+          </div>
+
+          <div class="campo">
+            <label for="descricao">Descreva sua sugestão</label>
+            <textarea id="descricao" required
+                      maxlength="1500"
+                      placeholder="Explique o que pode melhorar e por quê..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-primario">
+            Enviar sugestão
+          </button>
+        </form>
+
+        <div id="sucesso" class="aviso-sucesso" hidden>
+          <h3>Sugestão enviada com sucesso!</h3>
+          <p>Guarde seu protocolo para acompanhar o pedido:</p>
+          <strong id="protocoloGerado"></strong>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONSULTA DE PEDIDOS -->
+    <section id="consultar" class="aba-conteudo">
+      <div class="painel">
+        <div class="painel-cabecalho">
+          <h2>Acompanhe sua sugestão</h2>
+          <p>
+            Informe o número do protocolo para verificar
+            o andamento do seu pedido.
+          </p>
+        </div>
+
+        <form id="formConsulta">
+          <div class="campo">
+            <label for="protocoloBusca">Número do protocolo</label>
+            <input type="text" id="protocoloBusca"
+                   required placeholder="Ex.: VA-12345678">
+          </div>
+
+          <button type="submit" class="btn-primario">
+            Consultar pedido
+          </button>
+        </form>
+
+        <div id="resultadoConsulta"></div>
+      </div>
+    </section>
+
+    <!-- PAINEL DA COORDENAÇÃO -->
+    <section id="coordenacao" class="aba-conteudo">
+      <div class="painel">
+        <div class="painel-cabecalho">
+          <h2>Painel da Coordenação</h2>
+          <p>
+            Acompanhe as sugestões dos alunos e gerencie
+            as melhorias solicitadas.
+          </p>
+        </div>
+
+        <div class="dashboard">
+          <div class="card">
+            <span>Total de pedidos</span>
+            <strong id="total">0</strong>
+          </div>
+
+          <div class="card">
+            <span>Pendentes</span>
+            <strong id="pendentes">0</strong>
+          </div>
+
+          <div class="card">
+            <span>Em análise</span>
+            <strong id="analise">0</strong>
+          </div>
+
+          <div class="card">
+            <span>Concluídos</span>
+            <strong id="concluidos">0</strong>
+          </div>
+        </div>
+
+        <div class="filtros">
+          <input type="search" id="pesquisa"
+                 placeholder="Pesquisar sugestões...">
+
+          <select id="filtroStatus">
+            <option value="Todos">Todos os status</option>
+            <option>Pendente</option>
+            <option>Em análise</option>
+            <option>Aprovado</option>
+            <option>Concluído</option>
+          </select>
+
+          <select id="filtroCategoria">
+            <option value="Todas">Todas as categorias</option>
+            <option>Infraestrutura</option>
+            <option>Limpeza</option>
+            <option>Salas de aula</option>
+            <option>Tecnologia</option>
+            <option>Alimentação</option>
+            <option>Eventos e atividades</option>
+            <option>Outros</option>
+          </select>
+        </div>
+
+        <div id="listaPedidos" class="lista-pedidos"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Voz do Aluno © 2026 | Projeto de Melhorias Escolares</p>
+  </footer>
+
+</body>
+</html>
